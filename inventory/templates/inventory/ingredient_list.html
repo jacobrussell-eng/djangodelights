@@ -1,19 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block title %}Django Delights - Ingredients{% endblock %}
+{% block content %}
+<h2>Ingredients</h2>
+<p><a href="{% url 'add_ingredient' %}" style="text-decoration: none;">+ Add Ingredient</a></p>
+<hr style="margin: 0px 0px 10px 0px;">
 <table>
     <tr>
         <th>Ingredient</th>
         <th>Quantity</th>
         <th>Measured Unit</th>
         <th>Price per Unit</th>
+        <th> </th>
     </tr>
     {% for ing in object_list %}
     <tr>
-        <td>{{ ing.name }}</td>
+        <td><a href="{% url 'update_ingredient' ing.id %}">{{ ing.name }}</a></td>
         <td>{{ ing.quantity }}</td>
         <td>{{ ing.unit }}</td>
-        <td>${{ ing.unit_price }}/{{ ing.unit }}</td>
+        <td>${{ ing.unit_price|floatformat:2 }}/{{ ing.unit|slice:":-1" }}</td>
+        <td><a href="{% url 'delete_ingredient' ing.id %}" style="text-decoration: none;">&#x274c;</a></td>
     </tr>
     {% endfor %}
 </table>
+{% endblock %}

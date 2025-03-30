@@ -1,2 +1,32 @@
 {% extends "base.html" %}
 {% load static %}
+{% block title %}Django Delights - Reports{% endblock %}
+{% block content %}
+<div>
+    <h2>Purchases</h2>
+    <hr style="margin: 30px 0;">
+    <table class="inventory-table">
+        <thead>
+            <tr>
+                <th>Menu Item</th>
+                <th>Price</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for purchase in purchases %}
+            <tr>
+                <td>{{ purchase.ordered_item.item_name }}</td>
+                <td class="price">${{ purchase.ordered_item.item_price|floatformat:2 }}</td>
+                <td>{{ purchase.order_time }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <hr style="margin: 30px 0;">
+    <h2>Summary</h2>
+    <h4 style="color:green;">Total Revenue: ${{ revenue|floatformat:2 }}</h4>
+    <h4 style="color:red;">Total Cost: ${{ total_cost|floatformat:2 }}</h4>
+    <h4 style="color:blue;">Total Profit: ${{ profit|floatformat:2 }}</h4>
+</div>
+{% endblock %}

@@ -1,2 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Django Delights - Menu{% endblock %}
+{% block content %}
+<h2>Menu</h2>
+<p><a href="{% url 'add_menu_item' %}" style="text-decoration: none;">+ Add Menu Item</a></p>
+<p><a href="{% url 'add_requirement' %}" style="text-decoration: none;">+ Add Recipe Requirements to an Existing Menu Item</a></p>
+<hr style="margin: 0px 0px 10px 0px;">
+<div style="display: flex; flex-wrap: wrap;">
+    {% for item in object_list %}
+    <div class="menu-item">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 0px 0px 10px 0px;">
+            <h3 style="margin: 5px 0px 0px">{{ item.item_name }}&emsp;</h3>
+            <h4 style="margin: 5px 0px 0px">${{ item.item_price|floatformat:2 }}</h4>
+        </div>
+        <hr>
+        <ul class="menu-item-ingredients" style="text-align: left;">
+            {% for req in item.reciperequirement_set.all %}
+            <li>{{ req.how_many }} {{ req.ingredient.unit }} {{ req.ingredient.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% block title %}Django Delights{% endblock %}
 {% block content %}
 <h1>Home Page</h1>
+<hr style="margin: 0px;">
 <div class="home">
     <div>
         <h2>Ingredients:</h2>
@@ -64,9 +65,9 @@
             <tbody>
             {% for purchase in purchases %}
                 <tr>
-                    <td>{{ purchase.menu_item.item_name }}</td>
-                    <td class="price">${{ purchase.menu_item.item_price|stringformat:".2f" }}</td>
-                    <td>{{ purchase.timestamp }}</td>
+                    <td>{{ purchase.ordered_item.item_name }}</td>
+                    <td class="price">${{ purchase.ordered_item.item_price|stringformat:".2f" }}</td>
+                    <td>{{ purchase.order_time }}</td>
                 </tr>
             {% endfor %}
             </tbody>
