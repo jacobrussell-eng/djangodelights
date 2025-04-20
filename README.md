@@ -13,3 +13,7 @@ python manage.py runserver <8000>
 ```
 
 Then navigate to [localhost](http://localhost:8000/).
+
+## Screenshots
+
+<img src="inv_screenshot.PNG" alt="Inventory Screenshot" width="60%" height="auto">
